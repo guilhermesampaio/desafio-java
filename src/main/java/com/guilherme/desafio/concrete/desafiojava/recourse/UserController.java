@@ -11,30 +11,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.guilherme.desafio.concrete.desafiojava.model.Usuario;
+import com.guilherme.desafio.concrete.desafiojava.model.User;
 import com.guilherme.desafio.concrete.desafiojava.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioResource {
+public class UserController {
 
 	@Autowired
 	private UsuarioRepository repository;
 
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+	public ResponseEntity<?> create(@RequestBody User usuario) throws Exception {
 		try {
-			Usuario userCreated = repository.save(usuario);
-			return new ResponseEntity<Usuario>(userCreated, HttpStatus.OK);
+			User userCreated = repository.save(usuario);
+			return new ResponseEntity<User>(userCreated, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 
 	@GetMapping
-	public List<Usuario> getAll() {
+	public List<User> getAll() {
 		return repository.findAll();
 	}
 }
