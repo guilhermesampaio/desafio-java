@@ -1,6 +1,5 @@
 package com.guilherme.desafio.concrete.desafiojava.model;
 
-import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +26,6 @@ public class User extends Auditable<String> {
 	@Column(nullable = true)
 	private Date lastLogin;
 	private String token;
-	
 	
 	
 	public User() {
