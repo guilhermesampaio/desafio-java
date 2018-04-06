@@ -16,7 +16,7 @@ import com.guilherme.desafio.concrete.desafiojava.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/usuario")
-public class UserController {
+public class UserController{
 
 	@Autowired
 	private UsuarioRepository repository;

@@ -1,10 +1,12 @@
 package com.guilherme.desafio.concrete.desafiojava.model;
 
-import java.util.Collection;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,23 +14,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class User extends Auditable<String> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	//private UUID id;
 	private String name;
 	private String password;
-	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Phone> phones;
-		
+	
+	@Column(nullable = true)
+	private Date lastLogin;
+	private String token;
+	
+	
+	
 	public User() {
-		//this.id = UUID.randomUUID();
+		this.lastLogin = null;
 	}
 	
-
+	
 	public long getId() {
 		return id;
 	}
@@ -53,11 +59,27 @@ public class User {
 		this.password = password;
 	}
 
-	public Collection<Phone> getPhones() {
+	public List<Phone> getPhones() {
 		return phones;
 	}
 
 	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }
