@@ -19,13 +19,15 @@ public class User extends Auditable<String> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private String password;
+	private String email;
+	private String password;	
+	private String token;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Phone> phones;
 	
 	@Column(nullable = true)
 	private Date lastLogin;
-	private String token;
 	
 	
 	public User() {
@@ -79,5 +81,14 @@ public class User extends Auditable<String> {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

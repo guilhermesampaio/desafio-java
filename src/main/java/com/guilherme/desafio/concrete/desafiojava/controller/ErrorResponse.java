@@ -1,4 +1,4 @@
-package com.guilherme.desafio.concrete.desafiojava.recourse;
+package com.guilherme.desafio.concrete.desafiojava.controller;
 
 public class ErrorResponse {
 
