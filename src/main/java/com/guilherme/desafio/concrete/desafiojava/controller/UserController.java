@@ -1,5 +1,6 @@
 package com.guilherme.desafio.concrete.desafiojava.controller;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class UserController {
 	@GetMapping("/profile/{id}")
 	public ResponseEntity<?> profile(@RequestHeader("Authorization") String requestToken, @PathVariable Long id) {
 		try {
+			
 			User user = this.userService.get(id);
 			
 			if(user == null) {				
@@ -49,14 +51,15 @@ public class UserController {
 				return Unauthorized("Não autorizado");
 			}
 			
-			Date tokenExpiration = new Date();
-			tokenExpiration.setMinutes(-1);
+			LocalDateTime tokenExpiration = LocalDateTime.now().minusMinutes(2);
+			
 			
 			if(tokenExpiration.compareTo(user.getLastLogin()) == 1) {				
 				return Unauthorized("Sessão inválida");
 			}
 
 			return ResponseEntity.ok(user);
+			
 		} catch (Exception e) {
 			return InternalServerError(e.getMessage());
 		}

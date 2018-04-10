@@ -1,9 +1,8 @@
 package com.guilherme.desafio.concrete.desafiojava.model;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +26,7 @@ public class User extends Auditable<String> {
 	private List<Phone> phones;
 	
 	@Column(nullable = true)
-	private Date lastLogin;
+	private LocalDateTime lastLogin;
 	
 	
 	public User() {
@@ -67,11 +66,11 @@ public class User extends Auditable<String> {
 		this.phones = phones;
 	}
 
-	public Date getLastLogin() {
+	public LocalDateTime getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(Date lastLogin) {
+	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
