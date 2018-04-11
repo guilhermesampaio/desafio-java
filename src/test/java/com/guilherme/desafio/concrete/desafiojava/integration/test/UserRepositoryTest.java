@@ -18,47 +18,39 @@ import com.guilherme.desafio.concrete.desafiojava.repository.IUserRepository;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserRepositoryTest {
-	
+
 	@Autowired
 	private TestEntityManager entityManager;
-	
+
 	@Autowired
 	private IUserRepository userRepository;
-	
-	
+
 	@Test
 	public void userExistsByEmail_WithExistingEmail_ShouldReturnTrue() {
-		
+
 		// Arrange
 		final String email = "some.email@provider.com";
 		User userTest = new User();
-		userTest.setEmail(email);		
+		userTest.setEmail(email);
 		userTest.setCreated(new Date());
 		this.entityManager.persist(userTest);
-		
+		this.entityManager.flush();
+
 		// Act
 		Boolean result = this.userRepository.existsByEmail(email);
-		
-		// Assert		
+
+		// Assert
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void userExistsByEmail_WithInexistent_ShouldReturnFalse() {
-		
-		// Arrange
-		final String email = "some.email@provider.com";
-		User userTest = new User();
-		userTest.setEmail(email);		
-		userTest.setCreated(new Date());
-		this.entityManager.persist(userTest);
-		
-		// Act
+
+		// Arrange & Act
 		Boolean result = this.userRepository.existsByEmail("inexistent.email@privder.com");
-		
-		// Assert		
+
+		// Assert
 		assertFalse(result);
 	}
-	
 
 }
